@@ -33,7 +33,7 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	SnakeGamePanel(){
 		random = new Random();
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.darkGray);
+		this.setBackground(Color.DARK_GRAY);
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
 		startGame();
@@ -52,10 +52,15 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	public void draw(Graphics g) {
 		for (int i=0; i<screenHeight/unitSize; i++) {
 			g.drawLine(i*unitSize, 0, i*unitSize, screenHeight);
+			g.drawLine(0, i*unitSize, screenWidth, i*unitSize);
 		}
+		g.setColor(Color.green);
+		g.fillOval(ballPositionX, ballPositionY, unitSize, unitSize);
 	}
 	public void newBall() {
-		
+		ballPositionX = random.nextInt((int)(screenWidth/unitSize))*unitSize;
+		ballPositionY = random.nextInt((int)(screenHeight/unitSize))*unitSize;
+
 	}
 	public void move() {
 		
