@@ -13,6 +13,10 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	static final int screenWidth = 600; 
 	static final int screenHeight = 600; 
 	static final int unitSize = 25;
+	static final int gameUnits = (screenWidth * screenHeight)/unitSize;
+	static final int delay = 75; // higher the number, slower the game
+	final int x[] = new int[gameUnits];
+	final int y[] = new int[gameUnits];
 	
 	SnakeGamePanel(){
 		
