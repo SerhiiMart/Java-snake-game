@@ -8,9 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
-import java.util.Timer;
+
 
 import javax.swing.JPanel;
+import javax.swing.Timer; //not util.Timer
 
 public class SnakeGamePanel extends JPanel implements ActionListener {
 	static final int screenWidth = 600; 
@@ -38,6 +39,10 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		startGame();
 	}
 	public void startGame() {
+		newBall();
+		running = true;
+		timer = new Timer(delay,this);
+		
 		
 	}
 	
@@ -45,6 +50,9 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		
 	}
 	public void draw(Graphics g) {
+		
+	}
+	public void newBall() {
 		
 	}
 	public void move() {
