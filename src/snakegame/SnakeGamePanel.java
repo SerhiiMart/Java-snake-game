@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer; //not util.Timer
 
 public class SnakeGamePanel extends JPanel implements ActionListener {
-	static final int screenWidth = 600; 
-	static final int screenHeight = 600; 
+	static final int screenWidth = 650; 
+	static final int screenHeight = 650; 
 	static final int unitSize = 25;
 	static final int gameUnits = (screenWidth * screenHeight)/unitSize;
 	static final int delay = 75; // higher the number, slower the game
@@ -42,15 +42,17 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		newBall();
 		running = true;
 		timer = new Timer(delay,this);
-		
-		
+		timer.start();
 	}
 	
 	public void paintComponent(Graphics g) {
-		
+		super.paintComponent(g);
+		draw(g);
 	}
 	public void draw(Graphics g) {
-		
+		for (int i=0; i<screenHeight/unitSize; i++) {
+			g.drawLine(i*unitSize, 0, i*unitSize, screenHeight);
+		}
 	}
 	public void newBall() {
 		
