@@ -1,5 +1,7 @@
 package snakegame;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +30,12 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	Random random;
 	
 	SnakeGamePanel(){
-		
+		random = new Random();
+		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.setBackground(Color.darkGray);
+		this.setFocusable(true);
+		this.addKeyListener(new MyKeyAdapter());
+		startGame();
 	}
 	public void startGame() {
 		
