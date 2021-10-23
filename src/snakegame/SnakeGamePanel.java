@@ -10,6 +10,9 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 public class SnakeGamePanel extends JPanel implements ActionListener {
+	static final int screenWidth = 600; 
+	static final int screenHeight = 600; 
+	static final int unitSize = 25;
 	
 	SnakeGamePanel(){
 		
