@@ -53,18 +53,19 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	}
 	public void draw(Graphics g) {  /// Method for graphics of the board
 		if(running) {
-			for (int i=0; i<screenHeight/unitSize; i++) {
+			for (int i=0; i<screenHeight/unitSize; i++) { //Board lines color 
 				g.drawLine(i*unitSize, 0, i*unitSize, screenHeight);
 				g.drawLine(0, i*unitSize, screenWidth, i*unitSize);
 			}
-			g.setColor(Color.green);
+			g.setColor(Color.green); //Ball color
 			g.fillOval(ballPositionX, ballPositionY, unitSize, unitSize);
 			for (int i = 0; i<bodyParts; i++) {
-				if (i==0) {
+				if (i==0) { // Color of the snake
 					g.setColor(Color.cyan);
 					g.fillRect(x[i], y[i], unitSize, unitSize);
-				} else {
+				} else { // Color of the snake body
 					g.setColor(new Color(203, 203, 191));
+					//g.setColor(new Color(random.nextInt(255)));//Random color of the snake body
 					g.fillRect(x[i], y[i], unitSize, unitSize);
 				}
 			}
