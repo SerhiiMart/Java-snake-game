@@ -96,7 +96,13 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		
 	}
 	public void checkCollision() {
-		
+		//Checks if head collides with body
+		for(int i = bodyParts; i>0; i--) {
+			if((x[0] == x[i]) && (y[0] == y[i])) {
+				running = false;
+			}
+		}
+		//Checks if head collides with border
 	}
 	public void gameOver(Graphics g) {
 		
