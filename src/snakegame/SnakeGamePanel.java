@@ -67,15 +67,20 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 			y[i] = y[i-1];
 		}
 		switch (direction) {
-		case 'U': {	
+		case 'U': 
 			y[0] = y[0] - unitSize;
 			break;
-		}
-		case 'D': {
-			
-		}
+		case 'D': 
+			y[0] = y[0] + unitSize;
+			break;
+		case 'L': 
+			x[0] = x[0] - unitSize;
+			break;
+		case 'R': 
+			x[0] = x[0] + unitSize;
+			break;
 		default:
-			throw new IllegalArgumentException("Unexpected value: " + key);
+			throw new IllegalArgumentException("Unexpected value: " + direction);
 		}
 	}
 	public void checkBall() {
