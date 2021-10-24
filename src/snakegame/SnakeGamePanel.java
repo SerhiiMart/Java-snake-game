@@ -2,6 +2,8 @@ package snakegame;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,7 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	static final int screenHeight = 650; 
 	static final int unitSize = 25;
 	static final int gameUnits = (screenWidth * screenHeight)/unitSize;
-	static final int delay = 75; // higher the number, slower the game
+	static final int delay = 100; // higher the number, slower the game
 	final int x[] = new int[gameUnits];
 	final int y[] = new int[gameUnits];
 	int bodyParts = 5;
@@ -49,21 +51,25 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		draw(g);
 	}
-	public void draw(Graphics g) {  /// Method for the board
-		for (int i=0; i<screenHeight/unitSize; i++) {
-			g.drawLine(i*unitSize, 0, i*unitSize, screenHeight);
-			g.drawLine(0, i*unitSize, screenWidth, i*unitSize);
-		}
-		g.setColor(Color.green);
-		g.fillOval(ballPositionX, ballPositionY, unitSize, unitSize);
-		for (int i = 0; i<bodyParts; i++) {
-			if (i==0) {
-				g.setColor(Color.red);
-				g.fillRect(x[i], y[i], unitSize, unitSize);
-			} else {
-				g.setColor(new Color(45, 180, 0));
-				g.fillRect(x[i], y[i], unitSize, unitSize);
+	public void draw(Graphics g) {  /// Method for graphics of the board
+		if(running) {
+			for (int i=0; i<screenHeight/unitSize; i++) {
+				g.drawLine(i*unitSize, 0, i*unitSize, screenHeight);
+				g.drawLine(0, i*unitSize, screenWidth, i*unitSize);
 			}
+			g.setColor(Color.green);
+			g.fillOval(ballPositionX, ballPositionY, unitSize, unitSize);
+			for (int i = 0; i<bodyParts; i++) {
+				if (i==0) {
+					g.setColor(Color.cyan);
+					g.fillRect(x[i], y[i], unitSize, unitSize);
+				} else {
+					g.setColor(new Color(203, 203, 191));
+					g.fillRect(x[i], y[i], unitSize, unitSize);
+				}
+			}
+		} else {
+			gameOver(g);
 		}
 	}
 	public void newBall() { /// Method to generate new balls
@@ -94,7 +100,11 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		}
 	}
 	public void checkBall() {
-		
+		if((x[0] == ballPositionX) && (y[0] == ballPositionY)) {
+			bodyParts++;
+			ballsEaten++;
+			newBall();
+		}
 	}
 	public void checkCollision() {
 		//Checks if head collides with body
@@ -123,8 +133,11 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 			timer.stop();
 		}
 	}
-	public void gameOver(Graphics g) {
-		
+	public void gameOver(Graphics g) { ///Method for the game over
+		g.setColor(Color.yellow);
+		g.setFont(new Font("Bodoni SvtyTwo ITC TT", Font.BOLD, 85));
+		FontMetrics metrics = getFontMetrics(g.getFont());
+		g.drawString("Game Over", (screenWidth - metrics.stringWidth("Game Over"))/2, screenHeight/2);
 	}
 	
 	@Override
