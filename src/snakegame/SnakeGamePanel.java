@@ -49,7 +49,7 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		draw(g);
 	}
-	public void draw(Graphics g) {
+	public void draw(Graphics g) {  /// Method for the board
 		for (int i=0; i<screenHeight/unitSize; i++) {
 			g.drawLine(i*unitSize, 0, i*unitSize, screenHeight);
 			g.drawLine(0, i*unitSize, screenWidth, i*unitSize);
@@ -66,11 +66,12 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	public void newBall() {
+	public void newBall() { /// Method to generate new balls
 		ballPositionX = random.nextInt((int)(screenWidth/unitSize))*unitSize;
 		ballPositionY = random.nextInt((int)(screenHeight/unitSize))*unitSize;
 	}
-	public void move() {
+	public void move() { /// Method for moving snake
+		
 		for(int i = bodyParts; i>0 ;i--) {
 			x[i] = x[i-1];
 			y[i] = y[i-1];
@@ -102,7 +103,25 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 				running = false;
 			}
 		}
-		//Checks if head collides with border
+		//Checks if head collides with the left border
+		if(x[0] < 0) {
+			running = false;
+		}
+		//Checks if head collides with the right border
+		if(x[0] > screenWidth) {
+			running = false;
+		}
+		//Checks if head collides with the top border
+		if(y[0] < 0) {
+			running = false;
+		}
+		//Checks if head collides with the down border
+		if(y[0] > screenHeight) {
+			running = false;
+		}
+		if (!running) {
+			timer.stop();
+		}
 	}
 	public void gameOver(Graphics g) {
 		
