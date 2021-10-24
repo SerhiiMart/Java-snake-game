@@ -56,6 +56,15 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		}
 		g.setColor(Color.green);
 		g.fillOval(ballPositionX, ballPositionY, unitSize, unitSize);
+		for (int i = 0; i<bodyParts; i++) {
+			if (i==0) {
+				g.setColor(Color.red);
+				g.fillRect(x[i], y[i], unitSize, unitSize);
+			} else {
+				g.setColor(new Color(45, 180, 0));
+				g.fillRect(x[i], y[i], unitSize, unitSize);
+			}
+		}
 	}
 	public void newBall() {
 		ballPositionX = random.nextInt((int)(screenWidth/unitSize))*unitSize;
@@ -95,7 +104,12 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(running) {
+			move();
+			checkBall();
+			checkCollision();
+		}
+		repaint();
 		
 	}
 	public class MyKeyAdapter extends KeyAdapter {
