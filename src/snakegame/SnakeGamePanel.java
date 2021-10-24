@@ -60,10 +60,23 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	public void newBall() {
 		ballPositionX = random.nextInt((int)(screenWidth/unitSize))*unitSize;
 		ballPositionY = random.nextInt((int)(screenHeight/unitSize))*unitSize;
-
 	}
 	public void move() {
-		
+		for(int i = bodyParts; i>0 ;i--) {
+			x[i] = x[i-1];
+			y[i] = y[i-1];
+		}
+		switch (direction) {
+		case 'U': {	
+			y[0] = y[0] - unitSize;
+			break;
+		}
+		case 'D': {
+			
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + key);
+		}
 	}
 	public void checkBall() {
 		
