@@ -35,7 +35,7 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 	SnakeGamePanel(){
 		random = new Random();
 		this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.setBackground(Color.DARK_GRAY);
+		this.setBackground(Color.BLACK);
 		this.setFocusable(true);
 		this.addKeyListener(new MyKeyAdapter());
 		startGame();
@@ -68,6 +68,10 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 					g.fillRect(x[i], y[i], unitSize, unitSize);
 				}
 			}
+			g.setColor(Color.YELLOW);
+			g.setFont(new Font("Bodoni SvtyTwo ITC TT", Font.BOLD, 35));
+			FontMetrics metrics = getFontMetrics(g.getFont());
+			g.drawString("Current score: " + ballsEaten, (screenWidth - metrics.stringWidth("Current score: " + ballsEaten))/2, g.getFont().getSize());
 		} else {
 			gameOver(g);
 		}
@@ -134,10 +138,16 @@ public class SnakeGamePanel extends JPanel implements ActionListener {
 		}
 	}
 	public void gameOver(Graphics g) { ///Method for the game over
+		//Message
 		g.setColor(Color.yellow);
 		g.setFont(new Font("Bodoni SvtyTwo ITC TT", Font.BOLD, 85));
-		FontMetrics metrics = getFontMetrics(g.getFont());
-		g.drawString("Game Over", (screenWidth - metrics.stringWidth("Game Over"))/2, screenHeight/2);
+		FontMetrics metricsM = getFontMetrics(g.getFont());
+		g.drawString("Game Over", (screenWidth - metricsM.stringWidth("Game Over"))/2, screenHeight/2);
+		//Score
+		g.setColor(Color.RED);
+		g.setFont(new Font("Bodoni SvtyTwo ITC TT", Font.BOLD, 35));
+		FontMetrics metricsS = getFontMetrics(g.getFont());
+		g.drawString("Final score: " + ballsEaten, (screenWidth - metricsS.stringWidth("Final score: " + ballsEaten))/2, g.getFont().getSize());
 	}
 	
 	@Override
